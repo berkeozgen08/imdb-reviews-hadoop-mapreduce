@@ -14,6 +14,9 @@ public class MovieAverageMapper extends MapReduceBase implements Mapper<LongWrit
 	public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
 		String valueString = value.toString();
 		JSONObject obj = JSONParser.parse(valueString);
-		output.collect(new Text(obj.getString("movie")), new IntWritable(obj.getInt("rating")));
+		output.collect(
+			new Text(obj.getString("movie")),
+			new IntWritable(Integer.parseInt(obj.getString("rating")))
+		);
 	}
 }
