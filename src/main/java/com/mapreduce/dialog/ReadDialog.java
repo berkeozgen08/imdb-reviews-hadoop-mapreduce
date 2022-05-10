@@ -9,27 +9,19 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
-import com.mapreduce.Singletons;
-import com.mapreduce.util.HadoopFileSystemView;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.Box;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
-import javax.swing.JFileChooser;
-import java.util.Set;
+import javax.swing.JTextField;
 
 public class ReadDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JFileChooser fileChooser = new JFileChooser(new HadoopFileSystemView(Path.of("/")));
 	private JLabel lblNewLabel_1;
-	private final JButton btnNewButton;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -59,23 +51,10 @@ public class ReadDialog extends JDialog {
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		}
 		{
-			btnNewButton = new JButton("Choose");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					switch (fileChooser.showOpenDialog(ReadDialog.this)) {
-						case JFileChooser.APPROVE_OPTION:
-							fileChooser.getSelectedFile();
-							break;
-						case JFileChooser.CANCEL_OPTION:
-							break;					 
-						case JFileChooser.ERROR_OPTION:
-							btnNewButton.setText("Error");
-							break;
-					}
-				}
-			});
-			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			contentPanel.add(btnNewButton);
+			textField = new JTextField();
+			textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			contentPanel.add(textField);
+			textField.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -86,7 +65,7 @@ public class ReadDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ReadWrite.readFileFromHDFS(btnNewButton.getText());							
+							ReadWrite.readFile(textField.getText());							
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException err) {
 							err.printStackTrace();

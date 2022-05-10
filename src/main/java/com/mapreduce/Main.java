@@ -27,6 +27,10 @@ import javax.swing.DefaultComboBoxModel;
 import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.ReadDialog;
 import com.mapreduce.dialog.WriteDialog;
+import javax.swing.Box;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
 
 public class Main {
 
@@ -111,7 +115,7 @@ public class Main {
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton btnRead = new JButton("Read");
 		panel_2.add(btnRead);
@@ -125,6 +129,15 @@ public class Main {
 		JButton btnNewButton = new JButton("Write");
 		panel_2.add(btnNewButton);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JButton btnNewButton_2 = new JButton("List");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(btnNewButton_2);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WriteDialog.create();
@@ -182,7 +195,7 @@ public class Main {
 		
 		JPanel panel_4 = new JPanel();
 		panel.add(panel_4);
-		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		final JComboBox<Job> comboBox = new JComboBox<Job>();
 		panel_4.add(comboBox);
@@ -203,7 +216,7 @@ public class Main {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panel_4.add(btnNewButton_1);
+		panel_4.add(btnNewButton_1, BorderLayout.SOUTH);
 		frame.getContentPane().add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 1, 0, 0));
 		

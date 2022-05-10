@@ -93,7 +93,7 @@ public class MovieAverageDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ReadWrite.writeFileToHDFS(textField.getText(), textField_1.getText());							
+							ReadWrite.writeFile(textField.getText(), textField_1.getText());							
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException err) {
 							err.printStackTrace();

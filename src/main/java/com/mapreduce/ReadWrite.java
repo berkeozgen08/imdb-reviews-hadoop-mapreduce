@@ -3,12 +3,14 @@ package com.mapreduce;
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.RemoteIterator;
 
 import java.io.*;
 
 public class ReadWrite {
-	public static void readFileFromHDFS(String fileName) throws IOException {
+	public static void readFile(String fileName) throws IOException {
 		Path hdfsReadPath = new Path(fileName);
 		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
 		byte[] buffer = new byte[100 * 1024];
@@ -18,7 +20,7 @@ public class ReadWrite {
 		inputStream.close();
 	}
 
-	public static void writeFileToHDFS(String fileName, String src) throws IOException {
+	public static void writeFile(String fileName, String src) throws IOException {
 		Path hdfsWritePath = new Path(fileName);
 		FSDataOutputStream fsDataOutputStream = Singletons.fileSystem.create(hdfsWritePath, true);
 		FileInputStream fis = new FileInputStream(src);
@@ -31,6 +33,18 @@ public class ReadWrite {
 		System.out.println(size);
 		fis.close();
 		fsDataOutputStream.close();
+	}
+
+	public static void listFiles(String path) {
+		try {
+			RemoteIterator<LocatedFileStatus> iter =
+				Singletons.fileSystem.listFiles(new Path(path), true);
+			while (iter.hasNext()) {
+				System.out.println(iter.next().getPath().toString());
+			}
+		} catch (IllegalArgumentException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
