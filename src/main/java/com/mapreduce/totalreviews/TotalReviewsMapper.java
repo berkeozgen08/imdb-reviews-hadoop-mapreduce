@@ -2,7 +2,7 @@ package com.mapreduce.totalreviews;
 
 import java.io.IOException;
 
-import com.mapreduce.JSONParser;
+import com.mapreduce.util.JSONParser;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;

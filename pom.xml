@@ -37,7 +37,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>com.mapreduce.ReadWrite</mainClass>
+					<mainClass>com.mapreduce.Main</mainClass>
 					<arguments>
 						<argument></argument>
 					</arguments>
@@ -49,7 +49,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.mapreduce.totalreviews.TotalReviewsDriver</mainClass>
+							<mainClass>com.mapreduce.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

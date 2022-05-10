@@ -8,45 +8,18 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class ReadWrite {
 	public static FileSystem fileSystem;
 
-	public static void main(String[] args) throws IOException {
+	static {
 		Configuration configuration = new Configuration();
 		configuration.set("fs.defaultFS", "hdfs://master:9000");
-		fileSystem = FileSystem.get(configuration);
-		Scanner scanner = new Scanner(System.in);
-		String choice = null;
-		while (true) {
-			System.out.println("0 - exit\n1 - read\n2 - write\n4 - mkdir\n5 - exists\nchoice: ");
-			choice = scanner.nextLine();
-			if (choice.equals("0")) break;
-			System.out.print("file name: ");
-			String fileName = scanner.nextLine();
-			try {
-				switch (choice) {
-					case "1":
-						readFileFromHDFS(fileName);
-						break;
-					case "2":
-						System.out.print("src file name: ");
-						writeFileToHDFS(fileName, scanner.nextLine());
-						break;
-					case "4":
-						createDirectory(fileName);
-						break;
-					case "5":
-						checkExists(fileName);
-						break;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		};
-		scanner.close();
-		fileSystem.close();
+		try {
+			fileSystem = FileSystem.get(configuration);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void readFileFromHDFS(String fileName) throws IOException {
@@ -56,17 +29,6 @@ public class ReadWrite {
 		while (inputStream.read(buffer, 0, buffer.length) != -1) {
 			System.out.print(IOUtils.toString(buffer, "UTF-8"));
 		}
-
-		/*
-		 * BufferedReader bufferedReader = new BufferedReader(
-		 * new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-		 * 
-		 * String line = null;
-		 * while ((line=bufferedReader.readLine())!=null){
-		 * System.out.println(line);
-		 * }
-		 */
-
 		inputStream.close();
 	}
 

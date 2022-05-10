@@ -1,4 +1,4 @@
-package com.mapreduce.totalreviews;
+package com.mapreduce.minmaxreview;
 
 import com.mapreduce.JobClientSingleton;
 import com.mapreduce.util.JSONParser;
@@ -13,24 +13,24 @@ import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.TextOutputFormat;
 
-public class TotalReviewsDriver {
+public class MinMaxReviewDriver {
 	public static void run(String input, String output) {
         // Create a configuration object for the job
-        JobConf jobConf = new JobConf(TotalReviewsDriver.class);
+        JobConf jobConf = new JobConf(MinMaxReviewDriver.class);
 
 		jobConf.set(XmlInputFormat.START_TAG_KEY, JSONParser.prefix);
 		jobConf.set(XmlInputFormat.END_TAG_KEY, JSONParser.suffix);
 
         // Set a name of the Job
-        jobConf.setJobName("TotalReviews");
+        jobConf.setJobName("MinMaxReview");
 
         // Specify data type of output key and value
         jobConf.setOutputKeyClass(Text.class);
         jobConf.setOutputValueClass(IntWritable.class);
 
         // Specify names of Mapper and Reducer Class
-        jobConf.setMapperClass(TotalReviewsMapper.class);
-        jobConf.setReducerClass(TotalReviewsReducer.class);
+        jobConf.setMapperClass(MinMaxReviewMapper.class);
+        jobConf.setReducerClass(MinMaxReviewReducer.class);
 
         // Specify formats of the data type of Input and output
         jobConf.setInputFormat(XmlInputFormat.class);

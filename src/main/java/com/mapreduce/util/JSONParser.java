@@ -1,4 +1,4 @@
-package com.mapreduce;
+package com.mapreduce.util;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;

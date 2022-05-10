@@ -1,4 +1,4 @@
-package com.mapreduce.dateaverage;
+package com.mapreduce.minmaxreview;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -15,7 +15,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
 import org.json.JSONObject;
 
-public class DateAverageMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
+public class MinMaxReviewMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
 	public static DateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
 
 	public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
