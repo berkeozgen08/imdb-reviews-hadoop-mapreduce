@@ -35,15 +35,11 @@ public class ReadWrite {
 		fsDataOutputStream.close();
 	}
 
-	public static void listFiles(String path) {
-		try {
-			RemoteIterator<LocatedFileStatus> iter =
-				Singletons.fileSystem.listFiles(new Path(path), true);
-			while (iter.hasNext()) {
-				System.out.println(iter.next().getPath().toString());
-			}
-		} catch (IllegalArgumentException | IOException e) {
-			e.printStackTrace();
+	public static void listFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		RemoteIterator<LocatedFileStatus> iter =
+			Singletons.fileSystem.listFiles(new Path(path), true);
+		while (iter.hasNext()) {
+			System.out.println(iter.next().getPath().toString());
 		}
 	}
 

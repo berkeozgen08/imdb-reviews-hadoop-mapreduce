@@ -133,7 +133,11 @@ public class Main {
 		JButton btnNewButton_2 = new JButton("List");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				try {
+					ReadWrite.listFiles("/");
+				} catch (IllegalArgumentException | IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
