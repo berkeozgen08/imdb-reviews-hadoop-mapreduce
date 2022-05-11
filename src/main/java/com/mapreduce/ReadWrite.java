@@ -58,6 +58,7 @@ public class ReadWrite {
 		while (iter.hasNext()) {
 			files.add(Path.getPathWithoutSchemeAndAuthority(iter.next().getPath()).toString());
 		}
+		files.sort((a, b) -> a.compareTo(b));
 		return files.stream().toArray(String[]::new);
 	}
 

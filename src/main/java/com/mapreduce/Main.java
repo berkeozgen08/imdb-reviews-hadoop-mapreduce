@@ -144,7 +144,7 @@ public class Main {
 		JButton btnCreateDirectory_1 = new JButton("Create Directory");
 		btnCreateDirectory_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemoveDirectoryDialog.create();
+				CreateDirectoryDialog.create();
 			}
 		});
 		btnCreateDirectory_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -164,6 +164,7 @@ public class Main {
 		JButton btnRemoveDirectory = new JButton("Remove Directory");
 		btnRemoveDirectory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				RemoveDirectoryDialog.create();
 			}
 		});
 		btnRemoveDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));

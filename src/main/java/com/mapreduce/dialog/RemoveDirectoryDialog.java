@@ -75,7 +75,7 @@ public class RemoveDirectoryDialog extends JDialog {
 				for (String i : arr) {
 					folders.add(i.substring(0, i.lastIndexOf('/') + 1));
 				}
-				comboBox.setModel(new DefaultComboBoxModel<String>());
+				comboBox.setModel(new DefaultComboBoxModel<String>(folders.stream().toArray(String[]::new)));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}
@@ -96,7 +96,7 @@ public class RemoveDirectoryDialog extends JDialog {
 						try {
 							String selected = (String) comboBox.getSelectedItem();
 							if (selected == null || selected.trim().isEmpty()) return;
-							ReadWrite.removeFile(selected);
+							ReadWrite.removeDirectory(selected);
 						} catch (IOException err) {
 							err.printStackTrace();
 						}
