@@ -25,6 +25,8 @@ import com.mapreduce.dialog.DateAverageDialog;
 import com.mapreduce.dialog.MinMaxReviewDialog;
 import com.mapreduce.dialog.MovieAverageDialog;
 import com.mapreduce.dialog.ReadDialog;
+import com.mapreduce.dialog.RemoveDialog;
+import com.mapreduce.dialog.RemoveDirectoryDialog;
 import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.WriteDialog;
 import com.mapreduce.util.PrintStreamCapturer;
@@ -62,11 +64,11 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 898, 531);
+		frame.setBounds(100, 100, 1024, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(7, 10, 870, 62);
+		panel.setBounds(7, 10, 993, 62);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JPanel panel_1 = new JPanel();
@@ -113,7 +115,7 @@ public class Main {
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton btnRead = new JButton("Read");
 		panel_2.add(btnRead);
@@ -138,17 +140,34 @@ public class Main {
 				}
 			}
 		});
+		
+		JButton btnCreateDirectory_1 = new JButton("Create Directory");
+		btnCreateDirectory_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemoveDirectoryDialog.create();
+			}
+		});
+		btnCreateDirectory_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(btnCreateDirectory_1);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(btnNewButton_2);
 		
-		JButton btnCreateDirectory = new JButton("Create Directory");
+		JButton btnCreateDirectory = new JButton("Remove");
 		btnCreateDirectory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateDirectoryDialog.create();
+				RemoveDialog.create();
 			}
 		});
 		btnCreateDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(btnCreateDirectory);
+		
+		JButton btnRemoveDirectory = new JButton("Remove Directory");
+		btnRemoveDirectory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnRemoveDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(btnRemoveDirectory);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WriteDialog.create();
@@ -200,7 +219,7 @@ public class Main {
 		});
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(7, 82, 870, 412);
+		panel_3.setBounds(7, 82, 1081, 591);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(panel);
 		

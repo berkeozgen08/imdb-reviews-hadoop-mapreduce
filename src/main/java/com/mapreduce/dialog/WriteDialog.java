@@ -123,7 +123,11 @@ public class WriteDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ReadWrite.writeFile(textField.getText(), btnNewButton.getText());							
+							String input = btnNewButton.getText();
+							if (input == null || input.equals("Choose")) return;
+							String output = textField.getText();
+							if (output == null || output.isBlank()) return;
+							ReadWrite.writeFile(output, input);
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException err) {
 							err.printStackTrace();

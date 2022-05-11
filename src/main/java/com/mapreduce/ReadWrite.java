@@ -34,9 +34,14 @@ public class ReadWrite {
 			size += read;
 			fsDataOutputStream.write(buffer, 0, read);
 		}
-		System.out.println(size);
+		System.out.println("Bytes written: " + size);
 		fis.close();
 		fsDataOutputStream.close();
+	}
+
+	public static void removeFile(String fileName) throws IOException {
+		Path path = new Path(fileName);
+		Singletons.fileSystem.delete(path, false);
 	}
 
 	public static void listFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
@@ -59,5 +64,10 @@ public class ReadWrite {
 	public static void createDirectory(String directoryName) throws IOException {
 		Path path = new Path(directoryName);
 		Singletons.fileSystem.mkdirs(path);
+	}
+
+	public static void removeDirectory(String directoryName) throws IOException {
+		Path path = new Path(directoryName);
+		Singletons.fileSystem.delete(path, true);
 	}
 }

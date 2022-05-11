@@ -88,7 +88,7 @@ public class ReadDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							String selected = (String) comboBox.getSelectedItem();
-							if (selected == null) return;
+							if (selected == null || selected.isBlank()) return;
 							ReadWrite.readFile(selected);
 						} catch (IOException err) {
 							err.printStackTrace();

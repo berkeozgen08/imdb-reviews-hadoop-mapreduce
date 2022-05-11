@@ -167,9 +167,11 @@ public class DateAverageDialog extends JDialog {
 						String[] selected = manager.selectedItems.stream().toArray(String[]::new);
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
-						if (output == null || output.isEmpty()) return;
+						if (output == null || output.isBlank()) return;
 						DateAverageMapper.from = (Date) datePicker.getModel().getValue();
+						if (DateAverageMapper.from == null) return;
 						DateAverageMapper.to = (Date) datePicker.getModel().getValue();
+						if (DateAverageMapper.to == null) return;
 						System.out.println(DateAverageMapper.from.toString());
 						System.out.println(DateAverageMapper.to.toString());
 						DateAverageDriver.run(selected, output);

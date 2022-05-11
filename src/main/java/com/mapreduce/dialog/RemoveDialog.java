@@ -10,27 +10,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
 
-public class CreateDirectoryDialog extends JDialog {
+public class RemoveDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField_1;
 	private JLabel lblNewLabel_1;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void create() {
 		try {
-			CreateDirectoryDialog dialog = new CreateDirectoryDialog();
+			RemoveDialog dialog = new RemoveDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -41,19 +42,19 @@ public class CreateDirectoryDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public CreateDirectoryDialog() {
-		setBounds(100, 100, 555, 122);
+	public RemoveDialog() {
+		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{-12, 479, 0};
+		gbl_contentPanel.columnWidths = new int[]{15, 146, 0};
 		gbl_contentPanel.rowHeights = new int[]{39, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
-			lblNewLabel_1 = new JLabel("Path: ");
+			lblNewLabel_1 = new JLabel("File: ");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 			gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
@@ -64,15 +65,18 @@ public class CreateDirectoryDialog extends JDialog {
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		}
 		{
-			textField_1 = new JTextField();
-			lblNewLabel_1.setLabelFor(textField_1);
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.gridx = 1;
-			gbc_textField_1.gridy = 0;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			textField_1.setColumns(10);
+			comboBox = new JComboBox<String>();
+			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			try {
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
+			} catch (IllegalArgumentException | IOException e) {
+				e.printStackTrace();
+			}
+			GridBagConstraints gbc_comboBox = new GridBagConstraints();
+			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+			gbc_comboBox.gridx = 1;
+			gbc_comboBox.gridy = 0;
+			contentPanel.add(comboBox, gbc_comboBox);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -83,10 +87,10 @@ public class CreateDirectoryDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							String path = textField_1.getText();
-							if (path == null || path.isBlank()) return;
-							ReadWrite.createDirectory(path);
-							System.out.println("Created");
+							String selected = (String) comboBox.getSelectedItem();
+							if (selected == null || selected.isBlank()) return;
+							ReadWrite.removeFile(selected);
+							System.out.println("Removed");
 						} catch (IOException err) {
 							err.printStackTrace();
 						}

@@ -118,7 +118,7 @@ public class TotalReviewsDialog extends JDialog {
 						String[] selected = manager.selectedItems.stream().toArray(String[]::new);
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
-						if (output == null || output.isEmpty()) return;
+						if (output == null || output.isBlank()) return;
 						TotalReviewsDriver.run(selected, output);
 						dispose();
 					}
