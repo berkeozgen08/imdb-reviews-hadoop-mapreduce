@@ -21,14 +21,14 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import com.mapreduce.dialog.CreateDirectoryDialog;
-import com.mapreduce.dialog.DateAverageDialog;
-import com.mapreduce.dialog.MinMaxReviewDialog;
-import com.mapreduce.dialog.MovieAverageDialog;
 import com.mapreduce.dialog.ReadDialog;
 import com.mapreduce.dialog.RemoveDialog;
 import com.mapreduce.dialog.RemoveDirectoryDialog;
-import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.WriteDialog;
+import com.mapreduce.dialog.jobs.DateAverageDialog;
+import com.mapreduce.dialog.jobs.MinMaxReviewDialog;
+import com.mapreduce.dialog.jobs.MovieAverageDialog;
+import com.mapreduce.dialog.jobs.TotalReviewsDialog;
 import com.mapreduce.util.PrintStreamCapturer;
 import com.mapreduce.util.ProcessHandler;
 import com.mapreduce.util.ServiceStatus;

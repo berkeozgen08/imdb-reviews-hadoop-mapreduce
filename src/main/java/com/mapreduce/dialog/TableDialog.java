@@ -11,6 +11,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.awt.event.ActionEvent;
 
 public class TableDialog extends JDialog {
 
@@ -28,6 +35,8 @@ public class TableDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
 			table = new JTable();
+			table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));
+			table.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			table.setModel(new DefaultTableModel(rows, headers));
 			int width = table.getSize().width;
 			table.getColumnModel().getColumn(0).setPreferredWidth(width);
@@ -44,13 +53,41 @@ public class TableDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Save");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String str = "";
+						for (int i = 0; i < rows.length; i++) {
+							int j;
+							for (j = 0; j < rows[i].length - 1; j++) {
+								str += rows[i][j] + "\t";
+							}
+							str += rows[i][j] + "\n";
+						}
+						try {
+							System.out.println("\n\n");
+							System.out.println("Wrote to " + Files.writeString(
+								Path.of("output.txt"),
+								str,
+								StandardCharsets.UTF_8
+							).toAbsolutePath().toString());
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Close");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

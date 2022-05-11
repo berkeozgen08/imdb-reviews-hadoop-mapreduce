@@ -1,4 +1,4 @@
-package com.mapreduce.dialog;
+package com.mapreduce.dialog.jobs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
+import com.mapreduce.dialog.TableDialog;
 import com.mapreduce.jobs.totalreviews.TotalReviewsDriver;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
@@ -108,6 +109,16 @@ public class TotalReviewsDialog extends JDialog {
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
 						TotalReviewsDriver.run(selected, output);
+						try {
+							String[] results = ReadWrite.getFiles(output);
+							for (String res : results) {
+								if (res.contains("part"))
+									new TableDialog(new String[] {"Review ID", "Count"}, ReadWrite.readTabular(res));
+							}
+						} catch (IllegalArgumentException | IOException e1) {
+							e1.printStackTrace();
+							new TableDialog(new String[] {"ERROR"}, new Object[0][0]);
+						}
 						dispose();
 					}
 				});
