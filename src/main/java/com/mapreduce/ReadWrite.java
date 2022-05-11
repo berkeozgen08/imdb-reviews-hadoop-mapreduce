@@ -96,7 +96,7 @@ public class ReadWrite {
 			files.addAll(getDir(files.get(i), directoryFilter));
 		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
-		return files.stream().toArray(String[]::new);
+		return files.stream().map(i -> i.replace(root.toString(), "") + "/").toArray(String[]::new);
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
