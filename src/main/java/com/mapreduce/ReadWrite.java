@@ -81,7 +81,7 @@ public class ReadWrite {
 			return Arrays
 				.asList(Singletons.fileSystem.listStatus(new Path(path), filter))
 				.stream()
-				.map(i -> i.getPath().toString().replace(root.toString(), "") + "/")
+				.map(i -> i.getPath().toString())
 				.collect(Collectors.toList());
 		} catch (IllegalArgumentException | IOException e) {
 			e.printStackTrace();
