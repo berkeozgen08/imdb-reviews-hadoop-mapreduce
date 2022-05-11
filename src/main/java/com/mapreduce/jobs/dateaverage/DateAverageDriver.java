@@ -15,43 +15,34 @@ import org.apache.hadoop.mapred.TextOutputFormat;
 
 public class DateAverageDriver {
 	public static void run(String[] inputs, String output) {
-        // Create a configuration object for the job
-        JobConf jobConf = new JobConf(DateAverageDriver.class);
+		JobConf jobConf = new JobConf(DateAverageDriver.class);
 
 		jobConf.set(XmlInputFormat.START_TAG_KEY, JSONParser.prefix);
 		jobConf.set(XmlInputFormat.END_TAG_KEY, JSONParser.suffix);
 
-        // Set a name of the Job
-        jobConf.setJobName("DateAverage");
+		jobConf.setJobName("DateAverage");
 
-        // Specify data type of output key and value
-        jobConf.setOutputKeyClass(Text.class);
-        jobConf.setOutputValueClass(IntWritable.class);
+		jobConf.setOutputKeyClass(Text.class);
+		jobConf.setOutputValueClass(IntWritable.class);
 
-        // Specify names of Mapper and Reducer Class
-        jobConf.setMapperClass(DateAverageMapper.class);
-        jobConf.setReducerClass(DateAverageReducer.class);
+		jobConf.setMapperClass(DateAverageMapper.class);
+		jobConf.setReducerClass(DateAverageReducer.class);
 
-        // Specify formats of the data type of Input and output
-        jobConf.setInputFormat(XmlInputFormat.class);
-        jobConf.setOutputFormat(TextOutputFormat.class);
-
-        // Set input and output directories using command line arguments, 
-        //arg[0] = name of input directory on HDFS, and arg[1] =  name of output directory to be created to store the output file.
+		jobConf.setInputFormat(XmlInputFormat.class);
+		jobConf.setOutputFormat(TextOutputFormat.class);
 
 		Path[] inputPaths = new Path[inputs.length];
 		for (int i = 0; i < inputPaths.length; i++) {
 			inputPaths[i] = new Path(inputs[i]);
 		}
-        FileInputFormat.setInputPaths(jobConf, inputPaths);
-        FileOutputFormat.setOutputPath(jobConf, new Path(output));
+		FileInputFormat.setInputPaths(jobConf, inputPaths);
+		FileOutputFormat.setOutputPath(jobConf, new Path(output));
 
-        Singletons.jobClient.setConf(jobConf);
-        try {
-            // Run the job 
-            JobClient.runJob(jobConf);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		Singletons.jobClient.setConf(jobConf);
+		try {
+			JobClient.runJob(jobConf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
