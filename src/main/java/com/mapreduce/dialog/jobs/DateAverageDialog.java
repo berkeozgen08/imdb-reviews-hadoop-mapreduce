@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -67,6 +68,11 @@ public class DateAverageDialog extends JDialog {
 		}
 		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		try {
+			comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
+		} catch (IllegalArgumentException | IOException e1) {
+			e1.printStackTrace();
+		}
 		final SelectionManager manager = new SelectionManager();
 		MultiRenderer renderer = new MultiRenderer(manager);
 		comboBox.addActionListener(manager);
