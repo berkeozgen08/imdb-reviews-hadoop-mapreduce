@@ -28,6 +28,7 @@ import com.mapreduce.dialog.WriteDialog;
 import com.mapreduce.dialog.jobs.DateAverageDialog;
 import com.mapreduce.dialog.jobs.MinMaxReviewDialog;
 import com.mapreduce.dialog.jobs.MovieAverageDialog;
+import com.mapreduce.dialog.jobs.StandardDeviationDialog;
 import com.mapreduce.dialog.jobs.TotalReviewsDialog;
 import com.mapreduce.util.PrintStreamCapturer;
 import com.mapreduce.util.ProcessHandler;
@@ -252,6 +253,9 @@ public class Main {
 					case DateAverage:
 						new DateAverageDialog();
 						break;
+					case StandardDeviation:
+						new StandardDeviationDialog();
+						break;
 					default:
 						break;
 				}
@@ -277,6 +281,7 @@ public class Main {
 		TotalReviews,
 		MovieAverage,
 		MinMaxReview,
-		DateAverage;
+		DateAverage,
+		StandardDeviation;
 	}
 }
