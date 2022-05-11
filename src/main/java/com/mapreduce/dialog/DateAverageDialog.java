@@ -53,6 +53,7 @@ public class DateAverageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public DateAverageDialog() {
+		setTitle("Date Average");
 		setBounds(100, 100, 554, 199);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

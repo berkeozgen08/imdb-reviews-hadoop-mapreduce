@@ -48,6 +48,7 @@ public class MovieAverageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public MovieAverageDialog() {
+		setTitle("Movie Average");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

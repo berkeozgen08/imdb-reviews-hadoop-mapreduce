@@ -47,6 +47,7 @@ public class WriteDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public WriteDialog() {
+		setTitle("Write");
 		setBounds(100, 100, 555, 156);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

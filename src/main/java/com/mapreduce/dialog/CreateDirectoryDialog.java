@@ -42,6 +42,7 @@ public class CreateDirectoryDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public CreateDirectoryDialog() {
+		setTitle("Create Directory");
 		setBounds(100, 100, 555, 122);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

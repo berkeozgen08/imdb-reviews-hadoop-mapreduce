@@ -43,6 +43,7 @@ public class RemoveDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public RemoveDialog() {
+		setTitle("Remove");
 		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
