@@ -64,11 +64,11 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1024, 720);
+		frame.setBounds(100, 100, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(7, 10, 993, 62);
+		panel.setBounds(7, 10, 1249, 62);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JPanel panel_1 = new JPanel();
@@ -219,7 +219,7 @@ public class Main {
 		});
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(7, 82, 1081, 591);
+		panel_3.setBounds(7, 82, 1249, 591);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(panel);
 		
