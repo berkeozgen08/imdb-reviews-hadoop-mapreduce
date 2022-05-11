@@ -85,7 +85,7 @@ public class ReadWrite {
 	private static List<String> getDir(String path, PathFilter filter) {
 		try {
 			return Arrays
-				.asList(Singletons.fileSystem.listStatus(new Path(root.toString() + path), filter))
+				.asList(Singletons.fileSystem.listStatus(new Path(path), filter))
 				.stream()
 				.map(i -> i.getPath().toString())
 				.collect(Collectors.toList());
@@ -97,7 +97,7 @@ public class ReadWrite {
 
 	public static String[] getDirectories(String path, boolean includeRoot) throws FileNotFoundException, IllegalArgumentException, IOException {
 		DirectoryFilter directoryFilter = new DirectoryFilter();
-		List<String> files = getDir(path, directoryFilter);
+		List<String> files = getDir(root.toString() + path, directoryFilter);
 		for (int i = 0; i < files.size(); i++) {
 			files.addAll(getDir(files.get(i), directoryFilter));
 		}
