@@ -11,7 +11,6 @@ public class ProcessHandler {
 		while (in.hasNextLine() || err.hasNextLine()) {
 			if (in.hasNextLine()) System.out.println(in.nextLine());
 			else System.err.println(err.nextLine());
-				
 		}
 		in.close();
 		err.close();

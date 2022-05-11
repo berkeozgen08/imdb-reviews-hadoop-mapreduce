@@ -31,6 +31,7 @@ import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.WriteDialog;
 import com.mapreduce.util.PrintStreamCapturer;
 import com.mapreduce.util.ProcessHandler;
+import com.mapreduce.util.ServiceStatus;
 
 public class Main {
 
@@ -82,7 +83,7 @@ public class Main {
 		
 		final JTextPane txtpnAsd_1 = new JTextPane();
 		panel_1.add(txtpnAsd_1);
-		txtpnAsd_1.setText("off");
+		txtpnAsd_1.setText(ServiceStatus.hadoop() ? "on" : "off");
 		txtpnAsd_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtpnAsd_1.setEditable(false);
 		
@@ -102,7 +103,7 @@ public class Main {
 		final JTextPane txtpnAsd = new JTextPane();
 		panel_1.add(txtpnAsd);
 		txtpnAsd.setEditable(false);
-		txtpnAsd.setText("off");
+		txtpnAsd.setText(ServiceStatus.yarn() ? "on" : "off");
 		txtpnAsd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JButton btnStart_1 = new JButton("Start");
