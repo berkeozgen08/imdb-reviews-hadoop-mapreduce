@@ -164,7 +164,7 @@ public class DateAverageDialog extends JDialog {
 				final JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String[] selected = manager.selectedItems.toArray(String[]::new);
+						String[] selected = manager.selectedItems.stream().toArray(String[]::new);
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
 						if (output == null || output.isEmpty()) return;
