@@ -24,7 +24,7 @@ public class ReadWrite {
 	public static Path root = Singletons.fileSystem.getHomeDirectory();
 
 	public static void readFile(String fileName) throws IOException {
-		Path path = new Path(root, fileName);
+		Path path = root.suffix(fileName);
 		FSDataInputStream inputStream = Singletons.fileSystem.open(path);
 		byte[] buffer = new byte[100 * 1024];
 		System.out.println("\n\n");
@@ -35,7 +35,7 @@ public class ReadWrite {
 	}
 
 	public static Object[][] readTabular(String fileName) throws IOException {
-		Path path = new Path(root, fileName);
+		Path path = root.suffix(fileName);
 		FSDataInputStream inputStream = Singletons.fileSystem.open(path);
 		Scanner scanner = new Scanner(inputStream);
 		List<List<Object>> list = new ArrayList<List<Object>>();
@@ -53,7 +53,7 @@ public class ReadWrite {
 	}
 
 	public static void writeFile(String fileName, String src) throws IOException {
-		Path path = new Path(root, fileName);
+		Path path = root.suffix(fileName);
 		FSDataOutputStream fsDataOutputStream = Singletons.fileSystem.create(path, true);
 		FileInputStream fis = new FileInputStream(src);
 		byte[] buffer = new byte[100 * 1024 * 1024];
@@ -69,7 +69,7 @@ public class ReadWrite {
 	}
 
 	public static void removeFile(String fileName) throws IOException {
-		Path path = new Path(root, fileName);
+		Path path = root.suffix(fileName);
 		Singletons.fileSystem.delete(path, false);
 	}
 
@@ -89,7 +89,7 @@ public class ReadWrite {
 
 	public static String[] getFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		RemoteIterator<LocatedFileStatus> iter =
-			Singletons.fileSystem.listFiles(new Path(root, path), true);
+			Singletons.fileSystem.listFiles(root.suffix(path), true);
 		List<String> files = new ArrayList<>();
 		while (iter.hasNext()) {
 			files.add(iter.next().getPath().toString().replace(root.toString(), ""));
@@ -123,12 +123,12 @@ public class ReadWrite {
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
-		Path path = new Path(root, directoryName);
+		Path path = root.suffix(directoryName);
 		Singletons.fileSystem.mkdirs(path);
 	}
 
 	public static void removeDirectory(String directoryName) throws IOException {
-		Path path = new Path(root, directoryName);
+		Path path = root.suffix(directoryName);
 		Singletons.fileSystem.delete(path, true);
 	}
 }
