@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -92,8 +93,9 @@ public class ReadWrite {
 	public static String[] getDirectories(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		DirectoryFilter directoryFilter = new DirectoryFilter();
 		List<String> files = getDir(path, directoryFilter);
-		for (String file : files) {
-			files.addAll(getDir(file, directoryFilter));
+		Iterator<String> iter = files.iterator();
+		while (iter.hasNext()) {
+			files.addAll(getDir(iter.next(), directoryFilter));
 		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
