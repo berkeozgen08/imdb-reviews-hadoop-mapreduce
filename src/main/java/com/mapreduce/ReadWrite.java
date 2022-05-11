@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -58,7 +59,8 @@ public class ReadWrite {
 		while (iter.hasNext()) {
 			files.add(Path.getPathWithoutSchemeAndAuthority(iter.next().getPath()).toString());
 		}
-		files.sort((a, b) -> a.compareTo(b));
+		Comparator<String> depth = (a, b) -> (int) (a.chars().filter(i -> i == '/').count() - b.chars().filter(i -> i == '/').count());
+		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
 	}
 
