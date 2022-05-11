@@ -104,12 +104,12 @@ public class ReadWrite {
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
-		Path path = new Path(directoryName);
+		Path path = new Path(root.toString() + directoryName);
 		Singletons.fileSystem.mkdirs(path);
 	}
 
 	public static void removeDirectory(String directoryName) throws IOException {
-		Path path = new Path(directoryName);
+		Path path = new Path(root.toString() + directoryName);
 		Singletons.fileSystem.delete(path, true);
 	}
 }
