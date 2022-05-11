@@ -82,7 +82,7 @@ public class WriteDialog extends JDialog {
 							btnNewButton.setText(fileChooser.getSelectedFile().getPath());
 							String[] arr = Arrays.copyOf(outputs, outputs.length);
 							for (int i = 0; i < outputs.length; i++) {
-								arr[i] = outputs[i] + btnNewButton.getText();
+								arr[i] = outputs[i] + fileChooser.getSelectedFile().getName();
 							}
 							comboBox.setModel(new DefaultComboBoxModel<String>(arr));
 							break;
