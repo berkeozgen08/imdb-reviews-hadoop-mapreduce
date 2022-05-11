@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.mapreduce.util.DirectoryFilter;
@@ -36,19 +37,18 @@ public class ReadWrite {
 	public static Object[][] readTabular(String fileName) throws IOException {
 		Path hdfsReadPath = new Path(root.toString() + fileName);
 		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
-		byte[] buffer = inputStream.readAllBytes();
-		String[] rows = IOUtils.toString(buffer, "UTF-8").trim().split("\n");
-		int row = rows.length;
-		int col = (int) rows[0].chars().filter(i -> i == '\t').count();
-		Object[][] res = new Object[row][col];
-		for (int i = 0; i < row; i++) {
-			String[] cols = rows[i].split("\t");
-			for (int j = 0; j < col; j++) {
-				res[i][j] = cols[j];
+		Scanner scanner = new Scanner(inputStream);
+		List<List<Object>> list = new ArrayList<List<Object>>();
+		while (scanner.hasNextLine()) {
+			String[] line = scanner.nextLine().split("\t");
+			List<Object> row = new ArrayList<>();
+			for (String col : line) {
+				row.add(col);
 			}
 		}
+		scanner.close();
 		inputStream.close();
-		return res;
+		return list.stream().map(i -> i.toArray(Object[]::new)).toArray(Object[][]::new);
 	}
 
 	public static void writeFile(String fileName, String src) throws IOException {
