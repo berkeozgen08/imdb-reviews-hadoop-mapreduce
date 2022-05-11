@@ -8,8 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.PrintWriter;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -66,11 +65,12 @@ public class TableDialog extends JDialog {
 						}
 						try {
 							System.out.println("\n\n");
-							System.out.println("Wrote to " + Files.writeString(
-								new File("output.txt").toPath(),
-								str,
-								StandardCharsets.UTF_8
-							).toAbsolutePath().toString());
+							File file = new File("output.txt");
+							PrintWriter writer = new PrintWriter(file);
+							writer.write(str);
+							writer.flush();
+							writer.close();
+							System.out.println("Wrote to " + file.getAbsolutePath());
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
