@@ -21,6 +21,9 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import com.mapreduce.dialog.CreateDirectoryDialog;
+import com.mapreduce.dialog.DateAverageDialog;
+import com.mapreduce.dialog.MinMaxReviewDialog;
+import com.mapreduce.dialog.MovieAverageDialog;
 import com.mapreduce.dialog.ReadDialog;
 import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.WriteDialog;
@@ -218,6 +221,16 @@ public class Main {
 				switch (job) {
 					case TotalReviews:
 						TotalReviewsDialog.create();
+						break;
+					case MovieAverage:
+						MovieAverageDialog.create();
+						break;
+					case MinMaxReview:
+						MinMaxReviewDialog.create();
+						break;
+					case DateAverage:
+						DateAverageDialog.create();
+						break;
 					default:
 						break;
 				}

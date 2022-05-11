@@ -8,9 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.util.Date;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -19,24 +18,30 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.mapreduce.ReadWrite;
-import com.mapreduce.jobs.totalreviews.TotalReviewsDriver;
+import com.mapreduce.jobs.dateaverage.DateAverageDriver;
+import com.mapreduce.jobs.dateaverage.DateAverageMapper;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-public class TotalReviewsDialog extends JDialog {
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
+public class DateAverageDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel_1;
 	private JComboBox<String> comboBox;
 	private JTextField textField;
+	private JDatePickerImpl datePicker;
+	private JDatePickerImpl datePicker_1;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void create() {
 		try {
-			TotalReviewsDialog dialog = new TotalReviewsDialog();
+			DateAverageDialog dialog = new DateAverageDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -47,16 +52,16 @@ public class TotalReviewsDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TotalReviewsDialog() {
-		setBounds(100, 100, 554, 150);
+	public DateAverageDialog() {
+		setBounds(100, 100, 554, 199);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{15, 146, 0};
-		gbl_contentPanel.rowHeights = new int[]{39, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{39, 0, 0, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			lblNewLabel_1 = new JLabel("Inputs: ");
@@ -71,11 +76,11 @@ public class TotalReviewsDialog extends JDialog {
 		}
 		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		try {
-			comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
-		} catch (IllegalArgumentException | IOException e1) {
-			e1.printStackTrace();
-		}
+		// try {
+		// 	comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
+		// } catch (IllegalArgumentException | IOException e1) {
+		// 	e1.printStackTrace();
+		// }
 		final SelectionManager manager = new SelectionManager();
 		MultiRenderer renderer = new MultiRenderer(manager);
 		comboBox.addActionListener(manager);
@@ -92,7 +97,7 @@ public class TotalReviewsDialog extends JDialog {
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 			gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel.gridx = 0;
 			gbc_lblNewLabel.gridy = 1;
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
@@ -101,11 +106,55 @@ public class TotalReviewsDialog extends JDialog {
 			textField = new JTextField();
 			textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_textField = new GridBagConstraints();
+			gbc_textField.insets = new Insets(0, 0, 5, 0);
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
 			gbc_textField.gridy = 1;
 			contentPanel.add(textField, gbc_textField);
 			textField.setColumns(10);
+		}
+		{
+			JLabel lblNewLabel_2 = new JLabel("From: ");
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+			gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_2.gridx = 0;
+			gbc_lblNewLabel_2.gridy = 2;
+			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		}
+		{
+			UtilDateModel model = new UtilDateModel();
+			JDatePanelImpl datePanel = new JDatePanelImpl(model);
+			datePicker = new JDatePickerImpl(datePanel);
+			datePicker.getJFormattedTextField().setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+			gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_1.gridx = 1;
+			gbc_textField_1.gridy = 2;
+			contentPanel.add(datePicker, gbc_textField_1);
+		}
+		{
+			JLabel lblNewLabel_2 = new JLabel("To: ");
+			lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+			gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel_2.gridx = 0;
+			gbc_lblNewLabel_2.gridy = 3;
+			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		}
+		{
+			UtilDateModel model = new UtilDateModel();
+			JDatePanelImpl datePanel = new JDatePanelImpl(model);
+			datePicker_1 = new JDatePickerImpl(datePanel);
+			datePicker_1.getJFormattedTextField().setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_1.gridx = 1;
+			gbc_textField_1.gridy = 3;
+			contentPanel.add(datePicker_1, gbc_textField_1);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -119,7 +168,11 @@ public class TotalReviewsDialog extends JDialog {
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
 						if (output == null || output.isEmpty()) return;
-						TotalReviewsDriver.run(selected, output);
+						DateAverageMapper.from = (Date) datePicker.getModel().getValue();
+						DateAverageMapper.to = (Date) datePicker.getModel().getValue();
+						System.out.println(DateAverageMapper.from.toString());
+						System.out.println(DateAverageMapper.to.toString());
+						DateAverageDriver.run(selected, output);
 						dispose();
 					}
 				});

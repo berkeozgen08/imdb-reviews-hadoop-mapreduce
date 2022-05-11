@@ -20,11 +20,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
-import com.mapreduce.jobs.totalreviews.TotalReviewsDriver;
+import com.mapreduce.jobs.movieaverage.MovieAverageDriver;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-public class TotalReviewsDialog extends JDialog {
+public class MovieAverageDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel_1;
@@ -36,7 +36,7 @@ public class TotalReviewsDialog extends JDialog {
 	 */
 	public static void create() {
 		try {
-			TotalReviewsDialog dialog = new TotalReviewsDialog();
+			MovieAverageDialog dialog = new MovieAverageDialog();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class TotalReviewsDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TotalReviewsDialog() {
+	public MovieAverageDialog() {
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -119,7 +119,7 @@ public class TotalReviewsDialog extends JDialog {
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
 						if (output == null || output.isEmpty()) return;
-						TotalReviewsDriver.run(selected, output);
+						MovieAverageDriver.run(selected, output);
 						dispose();
 					}
 				});

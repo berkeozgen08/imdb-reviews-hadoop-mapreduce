@@ -17,6 +17,8 @@ import org.json.JSONObject;
 
 public class DateAverageMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
 	public static DateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.US);
+	public static Date from;
+	public static Date to;
 
 	public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
 		String valueString = value.toString();
@@ -24,7 +26,7 @@ public class DateAverageMapper extends MapReduceBase implements Mapper<LongWrita
 		String dateString = obj.getString("review_date");
 		try {
 			Date date = format.parse(dateString);
-			if (date.before(format.parse("5 May 2020")) && date.after(format.parse("1 Jan 2020"))) {
+			if (date.after(from) && date.before(to)) {
 				return;
 			}
 		} catch (ParseException e) {

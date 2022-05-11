@@ -7,32 +7,37 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
+@SuppressWarnings("all")
 public class SelectionManager implements ActionListener {
-	JComboBox<String> combo = null;
-	List<String> selectedItems = new ArrayList<String>();
-	List<String> nonSelectables = new ArrayList<String>();
-
-	@SuppressWarnings("unchecked")
-	public void actionPerformed(ActionEvent e) {
-		if (combo == null) {
-			combo = (JComboBox<String>) e.getSource();
-		}
-		String item = (String) combo.getSelectedItem();
-		// Toggle the selection state for item.
-		if (selectedItems.contains(item)) {
-			selectedItems.remove(item);
-		} else if (!nonSelectables.contains(item)) {
-			selectedItems.add(item);
-		}
-	}
-
-	public void setNonSelectables(String... args) {
-		for (int j = 0; j < args.length; j++) {
-			nonSelectables.add(args[j]);
-		}
-	}
-
-	public boolean isSelected(String item) {
-		return selectedItems.contains(item);
-	}
+    JComboBox combo = null;
+    public List<Object> selectedItems = new ArrayList<Object>();  // j2se 1.5+
+    // List selectedItems = new ArrayList();               // j2se 1.4-
+    List<Object> nonSelectables = new ArrayList<Object>();
+  
+    public void actionPerformed(ActionEvent e) {
+        if(combo == null) {
+            combo = (JComboBox)e.getSource();
+        }
+        Object item = combo.getSelectedItem();
+        // Toggle the selection state for item.
+        if(selectedItems.contains(item)) {
+            selectedItems.remove(item);
+        } else if(!nonSelectables.contains(item)) {
+            selectedItems.add(item);
+        }
+    }
+  
+    /**
+     * The varargs feature (Object... args) is new in j2se 1.5
+     * You can replace the argument with an array.
+     */
+    public void setNonSelectables(Object... args) {
+        for(int j = 0; j < args.length; j++) {
+            nonSelectables.add(args[j]);
+        }
+    }
+  
+    public boolean isSelected(Object item) {
+        return selectedItems.contains(item);
+    }
 }

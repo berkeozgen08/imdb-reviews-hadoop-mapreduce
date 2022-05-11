@@ -2,34 +2,33 @@ package com.mapreduce.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.Box;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class WriteDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
-	private JTextField textField_1;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
+	private JButton btnNewButton;
+	private JFileChooser fileChooser = new JFileChooser();
 
 	/**
 	 * Launch the application.
@@ -48,12 +47,12 @@ public class WriteDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public WriteDialog() {
-		setBounds(100, 100, 317, 156);
+		setBounds(100, 100, 555, 156);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{17, 215, 0};
+		gbl_contentPanel.columnWidths = new int[]{17, 449, 0};
 		gbl_contentPanel.rowHeights = new int[]{39, 39, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
@@ -70,16 +69,28 @@ public class WriteDialog extends JDialog {
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		}
 		{
-			textField_1 = new JTextField();
-			lblNewLabel_1.setLabelFor(textField_1);
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-			gbc_textField_1.gridx = 1;
-			gbc_textField_1.gridy = 0;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			textField_1.setColumns(10);
+			fileChooser.setCurrentDirectory(new File("."));
+			btnNewButton = new JButton("Choose");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					switch (fileChooser.showOpenDialog(WriteDialog.this)) {
+						case JFileChooser.APPROVE_OPTION:
+							btnNewButton.setText(fileChooser.getSelectedFile().getPath());
+							break;
+						case JFileChooser.CANCEL_OPTION:
+							break;					 
+						case JFileChooser.ERROR_OPTION:
+							btnNewButton.setText("Error");
+							break;
+					}				}
+			});
+			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+			gbc_btnNewButton.fill = GridBagConstraints.BOTH;
+			gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+			gbc_btnNewButton.gridx = 1;
+			gbc_btnNewButton.gridy = 0;
+			contentPanel.add(btnNewButton, gbc_btnNewButton);
 		}
 		{
 			lblNewLabel = new JLabel("Output: ");
@@ -112,7 +123,7 @@ public class WriteDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							ReadWrite.writeFile(textField.getText(), textField_1.getText());							
+							ReadWrite.writeFile(textField.getText(), btnNewButton.getText());							
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException err) {
 							err.printStackTrace();

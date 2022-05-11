@@ -42,12 +42,12 @@ public class CreateDirectoryDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public CreateDirectoryDialog() {
-		setBounds(100, 100, 317, 122);
+		setBounds(100, 100, 555, 122);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{-12, 235, 0};
+		gbl_contentPanel.columnWidths = new int[]{-12, 479, 0};
 		gbl_contentPanel.rowHeights = new int[]{39, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};

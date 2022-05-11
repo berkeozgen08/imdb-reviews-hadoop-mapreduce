@@ -14,7 +14,7 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.TextOutputFormat;
 
 public class MovieAverageDriver {
-	public static void run(String input, String output) {
+	public static void run(String[] inputs, String output) {
         // Create a configuration object for the job
         JobConf jobConf = new JobConf(MovieAverageDriver.class);
 
@@ -39,7 +39,11 @@ public class MovieAverageDriver {
         // Set input and output directories using command line arguments, 
         //arg[0] = name of input directory on HDFS, and arg[1] =  name of output directory to be created to store the output file.
 
-        FileInputFormat.setInputPaths(jobConf, new Path(input));
+		Path[] inputPaths = new Path[inputs.length];
+		for (int i = 0; i < inputPaths.length; i++) {
+			inputPaths[i] = new Path(inputs[i]);
+		}
+        FileInputFormat.setInputPaths(jobConf, inputPaths);
         FileOutputFormat.setOutputPath(jobConf, new Path(output));
 
         Singletons.jobClient.setConf(jobConf);
