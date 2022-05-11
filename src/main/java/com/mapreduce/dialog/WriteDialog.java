@@ -17,6 +17,11 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class WriteDialog extends JDialog {
 
@@ -47,42 +52,56 @@ public class WriteDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		FlowLayout fl_contentPanel = new FlowLayout(FlowLayout.CENTER, 5, 5);
-		fl_contentPanel.setAlignOnBaseline(true);
-		contentPanel.setLayout(fl_contentPanel);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{17, 215, 0};
+		gbl_contentPanel.rowHeights = new int[]{39, 39, 0};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 		{
-			Box verticalBox = Box.createVerticalBox();
-			contentPanel.add(verticalBox);
-			{
-				Box horizontalBox = Box.createHorizontalBox();
-				verticalBox.add(horizontalBox);
-				{
-					lblNewLabel_1 = new JLabel("Input");
-					lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-					horizontalBox.add(lblNewLabel_1);
-				}
-				{
-					textField_1 = new JTextField();
-					textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-					horizontalBox.add(textField_1);
-					textField_1.setColumns(10);
-				}
-			}
-			{
-				Box horizontalBox = Box.createHorizontalBox();
-				verticalBox.add(horizontalBox);
-				{
-					lblNewLabel = new JLabel("Output");
-					lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-					horizontalBox.add(lblNewLabel);
-				}
-				{
-					textField = new JTextField();
-					textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-					horizontalBox.add(textField);
-					textField.setColumns(10);
-				}
-			}
+			lblNewLabel_1 = new JLabel("Input: ");
+			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+			gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
+			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_1.gridx = 0;
+			gbc_lblNewLabel_1.gridy = 0;
+			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		}
+		{
+			textField_1 = new JTextField();
+			lblNewLabel_1.setLabelFor(textField_1);
+			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+			gbc_textField_1.gridx = 1;
+			gbc_textField_1.gridy = 0;
+			contentPanel.add(textField_1, gbc_textField_1);
+			textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			textField_1.setColumns(10);
+		}
+		{
+			lblNewLabel = new JLabel("Output: ");
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
+			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+			gbc_lblNewLabel.gridx = 0;
+			gbc_lblNewLabel.gridy = 1;
+			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		}
+		{
+			textField = new JTextField();
+			lblNewLabel.setLabelFor(textField);
+			GridBagConstraints gbc_textField = new GridBagConstraints();
+			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField.gridx = 1;
+			gbc_textField.gridy = 1;
+			contentPanel.add(textField, gbc_textField);
+			textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			textField.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();

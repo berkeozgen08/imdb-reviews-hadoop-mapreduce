@@ -8,6 +8,8 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadWrite {
 	public static void readFile(String fileName) throws IOException {
@@ -15,7 +17,7 @@ public class ReadWrite {
 		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
 		byte[] buffer = new byte[100 * 1024];
 		while (inputStream.read(buffer, 0, buffer.length) != -1) {
-			System.out.print(IOUtils.toString(buffer, "UTF-8"));
+			System.out.print(IOUtils.toString(buffer, "UTF-8").trim());
 		}
 		inputStream.close();
 	}
@@ -36,24 +38,24 @@ public class ReadWrite {
 	}
 
 	public static void listFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		String[] files = getFiles(path);
+		for (String file : files) {
+			System.out.println(file);
+		}
+	}
+	
+	public static String[] getFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		RemoteIterator<LocatedFileStatus> iter =
 			Singletons.fileSystem.listFiles(new Path(path), true);
+		List<String> files = new ArrayList<>();
 		while (iter.hasNext()) {
-			System.out.println(iter.next().getPath().toString());
+			files.add(Path.getPathWithoutSchemeAndAuthority(iter.next().getPath()).toString());
 		}
+		return files.toArray(String[]::new);
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
 		Path path = new Path(directoryName);
 		Singletons.fileSystem.mkdirs(path);
-	}
-
-	public static void checkExists(String directoryName) throws IOException {
-		Path path = new Path(directoryName);
-		if (Singletons.fileSystem.exists(path)) {
-			System.out.println("File/Folder Exists : " + path.getName());
-		} else {
-			System.out.println("File/Folder does not Exists : " + path.getName());
-		}
 	}
 }

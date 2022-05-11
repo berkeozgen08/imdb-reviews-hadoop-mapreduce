@@ -1,36 +1,31 @@
 package com.mapreduce;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import javax.swing.JTextPane;
-
-import com.mapreduce.util.PrintStreamCapturer;
-import com.mapreduce.util.ProcessHandler;
-
-import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
+
 import javax.swing.BoxLayout;
-import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import com.mapreduce.dialog.TotalReviewsDialog;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+
+import com.mapreduce.dialog.CreateDirectoryDialog;
 import com.mapreduce.dialog.ReadDialog;
+import com.mapreduce.dialog.TotalReviewsDialog;
 import com.mapreduce.dialog.WriteDialog;
-import javax.swing.Box;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
+import com.mapreduce.util.PrintStreamCapturer;
+import com.mapreduce.util.ProcessHandler;
 
 public class Main {
 
@@ -115,7 +110,7 @@ public class Main {
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JButton btnRead = new JButton("Read");
 		panel_2.add(btnRead);
@@ -142,6 +137,15 @@ public class Main {
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(btnNewButton_2);
+		
+		JButton btnCreateDirectory = new JButton("Create Directory");
+		btnCreateDirectory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateDirectoryDialog.create();
+			}
+		});
+		btnCreateDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_2.add(btnCreateDirectory);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WriteDialog.create();
@@ -226,6 +230,7 @@ public class Main {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
 		// panel_3.add(textArea);
 		System.setOut(new PrintStreamCapturer(textArea, System.out));
 		System.setErr(new PrintStreamCapturer(textArea, System.err, "[ERROR] "));
