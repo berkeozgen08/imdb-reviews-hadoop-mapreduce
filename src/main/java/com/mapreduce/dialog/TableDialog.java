@@ -2,22 +2,22 @@ package com.mapreduce.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.GridLayout;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.awt.event.ActionEvent;
 
 public class TableDialog extends JDialog {
 
@@ -67,7 +67,7 @@ public class TableDialog extends JDialog {
 						try {
 							System.out.println("\n\n");
 							System.out.println("Wrote to " + Files.writeString(
-								Path.of("output.txt"),
+								new File("output.txt").toPath(),
 								str,
 								StandardCharsets.UTF_8
 							).toAbsolutePath().toString());
