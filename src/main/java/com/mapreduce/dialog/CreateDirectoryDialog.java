@@ -89,7 +89,6 @@ public class CreateDirectoryDialog extends JDialog {
 							ReadWrite.createDirectory(path);
 							System.out.println("\n\n");
 							System.out.println("Created");
-							System.out.println("\n\n");
 						} catch (IOException err) {
 							err.printStackTrace();
 						}

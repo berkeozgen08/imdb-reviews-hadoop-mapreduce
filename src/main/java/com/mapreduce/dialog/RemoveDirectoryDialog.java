@@ -93,7 +93,6 @@ public class RemoveDirectoryDialog extends JDialog {
 							ReadWrite.removeDirectory(selected);
 							System.out.println("\n\n");
 							System.out.println("Removed");
-							System.out.println("\n\n");
 						} catch (IOException err) {
 							err.printStackTrace();
 						}

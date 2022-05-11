@@ -13,7 +13,6 @@ public class ProcessHandler {
 			if (in.hasNextLine()) System.out.println(in.nextLine());
 			else System.err.println(err.nextLine());
 		}
-		System.out.println("\n\n");
 		in.close();
 		err.close();
 	}

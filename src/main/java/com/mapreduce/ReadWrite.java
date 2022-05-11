@@ -30,7 +30,6 @@ public class ReadWrite {
 		while (inputStream.read(buffer, 0, buffer.length) != -1) {
 			System.out.print(IOUtils.toString(buffer, "UTF-8").trim());
 		}
-		System.out.println("\n\n");
 		inputStream.close();
 	}
 
@@ -46,7 +45,6 @@ public class ReadWrite {
 		}
 		System.out.println("\n\n");
 		System.out.println("Bytes written: " + size);
-		System.out.println("\n\n");
 		fis.close();
 		fsDataOutputStream.close();
 	}
@@ -66,7 +64,6 @@ public class ReadWrite {
 		for (String file : files) {
 			System.out.println(file);
 		}
-		System.out.println("\n\n");
 	}
 	
 	private static Comparator<String> depth = (a, b) -> (int) (a.chars().filter(i -> i == '/').count() - b.chars().filter(i -> i == '/').count());
