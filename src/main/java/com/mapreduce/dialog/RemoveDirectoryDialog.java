@@ -30,8 +30,6 @@ public class RemoveDirectoryDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public RemoveDirectoryDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Remove Directory");
 		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());
@@ -103,6 +101,8 @@ public class RemoveDirectoryDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

@@ -22,8 +22,6 @@ public class TableDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public TableDialog(String[] headers, Object[][] rows) {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setBounds(100, 100, 1099, 684);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,6 +55,8 @@ public class TableDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

@@ -37,8 +37,6 @@ public class WriteDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public WriteDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Write");
 		setBounds(100, 100, 555, 156);
 		getContentPane().setLayout(new BorderLayout());
@@ -154,6 +152,8 @@ public class WriteDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

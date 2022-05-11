@@ -35,8 +35,6 @@ public class MovieAverageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public MovieAverageDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Movie Average");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
@@ -128,6 +126,8 @@ public class MovieAverageDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

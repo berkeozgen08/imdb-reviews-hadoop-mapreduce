@@ -30,8 +30,6 @@ public class ReadDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public ReadDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Read");
 		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());
@@ -101,6 +99,8 @@ public class ReadDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

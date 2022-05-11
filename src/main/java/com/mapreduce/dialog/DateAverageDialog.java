@@ -41,8 +41,6 @@ public class DateAverageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public DateAverageDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Date Average");
 		setBounds(100, 100, 554, 199);
 		getContentPane().setLayout(new BorderLayout());
@@ -177,6 +175,8 @@ public class DateAverageDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

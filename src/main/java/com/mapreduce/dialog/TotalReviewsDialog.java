@@ -35,8 +35,6 @@ public class TotalReviewsDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public TotalReviewsDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Total Reviews");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
@@ -128,6 +126,8 @@ public class TotalReviewsDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

@@ -35,8 +35,6 @@ public class MinMaxReviewDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public MinMaxReviewDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Min Max Review");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
@@ -128,6 +126,8 @@ public class MinMaxReviewDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }

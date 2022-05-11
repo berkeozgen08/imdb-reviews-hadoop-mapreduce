@@ -32,8 +32,6 @@ public class CreateDirectoryDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public CreateDirectoryDialog() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setTitle("Create Directory");
 		setBounds(100, 100, 555, 152);
 		getContentPane().setLayout(new BorderLayout());
@@ -128,6 +126,8 @@ public class CreateDirectoryDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 	}
 
 }
