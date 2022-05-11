@@ -45,7 +45,7 @@ public class TotalReviewsDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public TotalReviewsDialog() {
-		setBounds(100, 100, 317, 149);
+		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

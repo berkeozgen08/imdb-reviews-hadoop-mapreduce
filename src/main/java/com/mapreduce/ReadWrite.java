@@ -1,15 +1,17 @@
 package com.mapreduce;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReadWrite {
 	public static void readFile(String fileName) throws IOException {
@@ -51,7 +53,7 @@ public class ReadWrite {
 		while (iter.hasNext()) {
 			files.add(Path.getPathWithoutSchemeAndAuthority(iter.next().getPath()).toString());
 		}
-		return files.toArray(String[]::new);
+		return files.stream().toArray(String[]::new);
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
