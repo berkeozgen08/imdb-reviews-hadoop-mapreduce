@@ -48,7 +48,7 @@ public class ReadWrite {
 		}
 		scanner.close();
 		inputStream.close();
-		return list.stream().map(i -> i.toArray(Object[]::new)).toArray(Object[][]::new);
+		return list.stream().map(i -> i.stream().toArray(Object[]::new)).toArray(Object[][]::new);
 	}
 
 	public static void writeFile(String fileName, String src) throws IOException {
