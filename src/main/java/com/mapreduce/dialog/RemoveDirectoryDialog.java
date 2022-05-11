@@ -71,12 +71,13 @@ public class RemoveDirectoryDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				String[] arr = ReadWrite.getFiles("/");
-				Set<String> folders = new HashSet<>();
-				for (String i : arr) {
-					folders.add(i.substring(0, i.lastIndexOf('/') + 1));
-				}
-				comboBox.setModel(new DefaultComboBoxModel<String>(folders.stream().toArray(String[]::new)));
+				// String[] arr = ReadWrite.getFiles("/");
+				// Set<String> folders = new HashSet<>();
+				// for (String i : arr) {
+				// 	folders.add(i.substring(0, i.lastIndexOf('/') + 1));
+				// }
+				// comboBox.setModel(new DefaultComboBoxModel<String>(folders.stream().toArray(String[]::new)));
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories("/")));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}

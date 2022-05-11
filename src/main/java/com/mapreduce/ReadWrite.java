@@ -53,6 +53,10 @@ public class ReadWrite {
 	}
 
 	public static void listFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		String[] directories = getDirectories(path);
+		for (String dir : directories) {
+			System.out.println(dir);
+		}
 		String[] files = getFiles(path);
 		for (String file : files) {
 			System.out.println(file);
