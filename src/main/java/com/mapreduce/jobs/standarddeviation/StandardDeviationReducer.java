@@ -28,13 +28,15 @@ public class StandardDeviationReducer extends MapReduceBase
 		output.collect(
 			key,
 			new DoubleWritable(
-				Math.sqrt(
-					builder
-						.build()
-						.mapToDouble(i -> Math.pow(i - average, 2))
-						.sum()
-					/ (count - 1)
-				)
+				count > 1
+					? Math.sqrt(
+						builder
+							.build()
+							.mapToDouble(i -> Math.pow(i - average, 2))
+							.sum()
+						/ (count - 1)
+					)
+					: 0
 			)
 		);
 	}
