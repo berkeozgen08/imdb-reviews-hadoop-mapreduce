@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +26,7 @@ public class CreateDirectoryDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField_1;
 	private JLabel lblNewLabel_1;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -43,24 +46,48 @@ public class CreateDirectoryDialog extends JDialog {
 	 */
 	public CreateDirectoryDialog() {
 		setTitle("Create Directory");
-		setBounds(100, 100, 555, 122);
+		setBounds(100, 100, 555, 152);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{-12, 479, 0};
-		gbl_contentPanel.rowHeights = new int[]{39, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[]{-10, 465, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 39, 0};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
-			lblNewLabel_1 = new JLabel("Path: ");
+			JLabel lblNewLabel_1_1 = new JLabel("Path: ");
+			lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			GridBagConstraints gbc_lblNewLabel_1_1 = new GridBagConstraints();
+			gbc_lblNewLabel_1_1.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_1_1.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel_1_1.gridx = 0;
+			gbc_lblNewLabel_1_1.gridy = 0;
+			contentPanel.add(lblNewLabel_1_1, gbc_lblNewLabel_1_1);
+		}
+		{
+			comboBox = new JComboBox<String>();
+			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			try {
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories("/", false)));
+			} catch (IllegalArgumentException | IOException e) {
+				e.printStackTrace();
+			}
+			GridBagConstraints gbc_textField = new GridBagConstraints();
+			gbc_textField.insets = new Insets(0, 0, 5, 0);
+			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField.gridx = 1;
+			gbc_textField.gridy = 0;
+			contentPanel.add(comboBox, gbc_textField);
+		}
+		{
+			lblNewLabel_1 = new JLabel("Name: ");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-			gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
+			gbc_lblNewLabel_1.fill = GridBagConstraints.BOTH;
 			gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
 			gbc_lblNewLabel_1.gridx = 0;
-			gbc_lblNewLabel_1.gridy = 0;
+			gbc_lblNewLabel_1.gridy = 1;
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		}
@@ -70,7 +97,7 @@ public class CreateDirectoryDialog extends JDialog {
 			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField_1.gridx = 1;
-			gbc_textField_1.gridy = 0;
+			gbc_textField_1.gridy = 1;
 			contentPanel.add(textField_1, gbc_textField_1);
 			textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			textField_1.setColumns(10);
@@ -84,9 +111,11 @@ public class CreateDirectoryDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							String path = textField_1.getText();
+							String path = (String) comboBox.getSelectedItem();
 							if (path == null || path.trim().isEmpty()) return;
-							ReadWrite.createDirectory(path);
+							String name = textField_1.getText();
+							if (name == null || name.trim().isEmpty()) return;
+							ReadWrite.createDirectory(path + name);
 							System.out.println("\n\n");
 							System.out.println("Created");
 						} catch (IOException err) {
