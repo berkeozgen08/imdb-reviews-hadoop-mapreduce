@@ -97,6 +97,7 @@ public class RemoveDirectoryDialog extends JDialog {
 							String selected = (String) comboBox.getSelectedItem();
 							if (selected == null || selected.trim().isEmpty()) return;
 							ReadWrite.removeDirectory(selected);
+							System.out.println("Removed");
 						} catch (IOException err) {
 							err.printStackTrace();
 						}
