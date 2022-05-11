@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -82,7 +82,7 @@ public class ReadWrite {
 			return Arrays
 				.asList(Singletons.fileSystem.listStatus(new Path(path), filter))
 				.stream()
-				.map(i -> i.getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), ""))
+				.map(i -> i.getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), "") + "/")
 				.collect(Collectors.toList());
 		} catch (IllegalArgumentException | IOException e) {
 			e.printStackTrace();
@@ -93,10 +93,17 @@ public class ReadWrite {
 	public static String[] getDirectories(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		DirectoryFilter directoryFilter = new DirectoryFilter();
 		List<String> files = getDir(path, directoryFilter);
-		Iterator<String> iter = files.iterator();
-		while (iter.hasNext()) {
-			files.addAll(getDir(iter.next(), directoryFilter));
-		}
+		System.out.println(files);
+		System.out.println(getDir("/", directoryFilter));
+		System.out.println(getDir("/", new PathFilter() {
+			@Override
+			public boolean accept(Path arg0) {
+				return true;
+			}
+		}));
+		// for (int i = 0; i < files.size(); i++) {
+		// 	files.addAll(getDir(files.get(i), directoryFilter));
+		// }
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
 	}
