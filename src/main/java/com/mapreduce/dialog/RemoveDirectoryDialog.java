@@ -69,7 +69,7 @@ public class RemoveDirectoryDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString(), false)));
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories("/", false)));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}
@@ -91,7 +91,9 @@ public class RemoveDirectoryDialog extends JDialog {
 							String selected = (String) comboBox.getSelectedItem();
 							if (selected == null || selected.trim().isEmpty()) return;
 							ReadWrite.removeDirectory(selected);
+							System.out.println("\n\n");
 							System.out.println("Removed");
+							System.out.println("\n\n");
 						} catch (IOException err) {
 							err.printStackTrace();
 						}

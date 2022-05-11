@@ -168,8 +168,6 @@ public class DateAverageDialog extends JDialog {
 						if (DateAverageMapper.from == null) return;
 						DateAverageMapper.to = (Date) datePicker.getModel().getValue();
 						if (DateAverageMapper.to == null) return;
-						System.out.println(DateAverageMapper.from.toString());
-						System.out.println(DateAverageMapper.to.toString());
 						DateAverageDriver.run(selected, output);
 						dispose();
 					}

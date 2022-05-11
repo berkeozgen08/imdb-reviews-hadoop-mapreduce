@@ -116,7 +116,7 @@ public class WriteDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				outputs = ReadWrite.getDirectories(ReadWrite.root.toString(), true);
+				outputs = ReadWrite.getDirectories("/", true);
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}

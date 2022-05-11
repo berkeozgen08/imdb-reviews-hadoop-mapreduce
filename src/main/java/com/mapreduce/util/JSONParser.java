@@ -14,7 +14,6 @@ public class JSONParser {
 		} else {
 			s = s.substring(0, s.length() - 1);
 		}
-		// System.out.println("*"+s+"*");
 		return new JSONObject(new JSONTokener(s));
 	}
 }
