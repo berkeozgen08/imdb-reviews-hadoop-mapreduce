@@ -16,10 +16,10 @@ public class MinMaxReviewMapper extends MapReduceBase implements Mapper<LongWrit
 	public void map(LongWritable key, Text value, OutputCollector<Text, MinMaxTuple> output, Reporter reporter) throws IOException {
 		String valueString = value.toString();
 		JSONObject obj = JSONParser.parse(valueString);
-		Integer rating = Integer.parseInt(
-			obj.getString("rating")
-		);
 		try {
+			Integer rating = Integer.parseInt(
+				obj.getString("rating")
+			);
 			output.collect(
 				new Text(
 					obj.getString("movie")
