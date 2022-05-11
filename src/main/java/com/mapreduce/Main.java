@@ -122,7 +122,7 @@ public class Main {
 		panel_2.add(btnRead);
 		btnRead.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReadDialog.create();
+				new ReadDialog();
 			}
 		});
 		btnRead.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -145,7 +145,7 @@ public class Main {
 		JButton btnCreateDirectory_1 = new JButton("Create Directory");
 		btnCreateDirectory_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateDirectoryDialog.create();
+				new CreateDirectoryDialog();
 			}
 		});
 		btnCreateDirectory_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -156,7 +156,7 @@ public class Main {
 		JButton btnCreateDirectory = new JButton("Remove");
 		btnCreateDirectory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemoveDialog.create();
+				new RemoveDialog();
 			}
 		});
 		btnCreateDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -165,14 +165,14 @@ public class Main {
 		JButton btnRemoveDirectory = new JButton("Remove Directory");
 		btnRemoveDirectory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemoveDirectoryDialog.create();
+				new RemoveDirectoryDialog();
 			}
 		});
 		btnRemoveDirectory.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panel_2.add(btnRemoveDirectory);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				WriteDialog.create();
+				new WriteDialog();
 			}
 		});
 		btnStop_1.addActionListener(new ActionListener() {
@@ -241,16 +241,16 @@ public class Main {
 				Job job = (Job) comboBox.getSelectedItem();
 				switch (job) {
 					case TotalReviews:
-						TotalReviewsDialog.create();
+						new TotalReviewsDialog();
 						break;
 					case MovieAverage:
-						MovieAverageDialog.create();
+						new MovieAverageDialog();
 						break;
 					case MinMaxReview:
-						MinMaxReviewDialog.create();
+						new MinMaxReviewDialog();
 						break;
 					case DateAverage:
-						DateAverageDialog.create();
+						new DateAverageDialog();
 						break;
 					default:
 						break;

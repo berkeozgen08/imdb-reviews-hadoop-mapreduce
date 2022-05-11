@@ -34,22 +34,11 @@ public class WriteDialog extends JDialog {
 	private String[] outputs;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			WriteDialog dialog = new WriteDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public WriteDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Write");
 		setBounds(100, 100, 555, 156);
 		getContentPane().setLayout(new BorderLayout());

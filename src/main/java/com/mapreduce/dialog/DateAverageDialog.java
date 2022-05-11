@@ -38,22 +38,11 @@ public class DateAverageDialog extends JDialog {
 	private JDatePickerImpl datePicker_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			DateAverageDialog dialog = new DateAverageDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public DateAverageDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Date Average");
 		setBounds(100, 100, 554, 199);
 		getContentPane().setLayout(new BorderLayout());

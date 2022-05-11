@@ -27,22 +27,11 @@ public class ReadDialog extends JDialog {
 	private JComboBox<String> comboBox;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			ReadDialog dialog = new ReadDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public ReadDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Read");
 		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());

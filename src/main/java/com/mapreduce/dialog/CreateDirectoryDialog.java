@@ -29,22 +29,11 @@ public class CreateDirectoryDialog extends JDialog {
 	private JComboBox<String> comboBox;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			CreateDirectoryDialog dialog = new CreateDirectoryDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public CreateDirectoryDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Create Directory");
 		setBounds(100, 100, 555, 152);
 		getContentPane().setLayout(new BorderLayout());

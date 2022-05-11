@@ -32,22 +32,11 @@ public class MinMaxReviewDialog extends JDialog {
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			MinMaxReviewDialog dialog = new MinMaxReviewDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public MinMaxReviewDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Min Max Review");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());

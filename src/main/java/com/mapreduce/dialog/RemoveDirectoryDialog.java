@@ -27,22 +27,11 @@ public class RemoveDirectoryDialog extends JDialog {
 	private JComboBox<String> comboBox;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			RemoveDirectoryDialog dialog = new RemoveDirectoryDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public RemoveDirectoryDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Remove Directory");
 		setBounds(100, 100, 558, 114);
 		getContentPane().setLayout(new BorderLayout());

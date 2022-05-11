@@ -32,22 +32,11 @@ public class TotalReviewsDialog extends JDialog {
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void create() {
-		try {
-			TotalReviewsDialog dialog = new TotalReviewsDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public TotalReviewsDialog() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setVisible(true);
 		setTitle("Total Reviews");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
