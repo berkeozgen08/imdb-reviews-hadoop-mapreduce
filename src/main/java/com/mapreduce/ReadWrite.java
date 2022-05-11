@@ -24,8 +24,8 @@ public class ReadWrite {
 	public static Path root = Singletons.fileSystem.getHomeDirectory();
 
 	public static void readFile(String fileName) throws IOException {
-		Path hdfsReadPath = new Path(root.toString() + fileName);
-		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
+		Path path = new Path(root, fileName);
+		FSDataInputStream inputStream = Singletons.fileSystem.open(path);
 		byte[] buffer = new byte[100 * 1024];
 		System.out.println("\n\n");
 		while (inputStream.read(buffer, 0, buffer.length) != -1) {
@@ -35,8 +35,8 @@ public class ReadWrite {
 	}
 
 	public static Object[][] readTabular(String fileName) throws IOException {
-		Path hdfsReadPath = new Path(root.toString() + fileName);
-		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
+		Path path = new Path(root, fileName);
+		FSDataInputStream inputStream = Singletons.fileSystem.open(path);
 		Scanner scanner = new Scanner(inputStream);
 		List<List<Object>> list = new ArrayList<List<Object>>();
 		while (scanner.hasNextLine()) {
@@ -45,6 +45,7 @@ public class ReadWrite {
 			for (String col : line) {
 				row.add(col);
 			}
+			list.add(row);
 		}
 		scanner.close();
 		inputStream.close();
@@ -52,8 +53,8 @@ public class ReadWrite {
 	}
 
 	public static void writeFile(String fileName, String src) throws IOException {
-		Path hdfsWritePath = new Path(root.toString() + fileName);
-		FSDataOutputStream fsDataOutputStream = Singletons.fileSystem.create(hdfsWritePath, true);
+		Path path = new Path(root, fileName);
+		FSDataOutputStream fsDataOutputStream = Singletons.fileSystem.create(path, true);
 		FileInputStream fis = new FileInputStream(src);
 		byte[] buffer = new byte[100 * 1024 * 1024];
 		int read, size = 0;
@@ -68,7 +69,7 @@ public class ReadWrite {
 	}
 
 	public static void removeFile(String fileName) throws IOException {
-		Path path = new Path(root.toString() + fileName);
+		Path path = new Path(root, fileName);
 		Singletons.fileSystem.delete(path, false);
 	}
 
@@ -122,12 +123,12 @@ public class ReadWrite {
 	}
 
 	public static void createDirectory(String directoryName) throws IOException {
-		Path path = new Path(root.toString() + directoryName);
+		Path path = new Path(root, directoryName);
 		Singletons.fileSystem.mkdirs(path);
 	}
 
 	public static void removeDirectory(String directoryName) throws IOException {
-		Path path = new Path(root.toString() + directoryName);
+		Path path = new Path(root, directoryName);
 		Singletons.fileSystem.delete(path, true);
 	}
 }
