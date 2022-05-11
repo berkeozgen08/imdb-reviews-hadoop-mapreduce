@@ -88,7 +88,7 @@ public class ReadWrite {
 
 	public static String[] getFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		RemoteIterator<LocatedFileStatus> iter =
-			Singletons.fileSystem.listFiles(new Path(root.toString() + path), true);
+			Singletons.fileSystem.listFiles(new Path(root, path), true);
 		List<String> files = new ArrayList<>();
 		while (iter.hasNext()) {
 			files.add(iter.next().getPath().toString().replace(root.toString(), ""));
