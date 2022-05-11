@@ -26,7 +26,6 @@ import com.mapreduce.ReadWrite;
 public class WriteDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JButton btnNewButton;
@@ -119,9 +118,7 @@ public class WriteDialog extends JDialog {
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
 			gbc_textField.gridy = 1;
-			contentPanel.add(textField, gbc_textField);
-			textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			textField.setColumns(10);
+			contentPanel.add(comboBox, gbc_textField);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -134,7 +131,7 @@ public class WriteDialog extends JDialog {
 						try {
 							String input = btnNewButton.getText();
 							if (input == null || input.equals("Choose")) return;
-							String output = textField.getText();
+							String output = (String) comboBox.getSelectedItem();
 							if (output == null || output.trim().isEmpty()) return;
 							ReadWrite.writeFile(output, input);
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
