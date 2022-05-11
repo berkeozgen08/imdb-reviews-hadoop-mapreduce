@@ -69,7 +69,7 @@ public class RemoveDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles(ReadWrite.root.toString())));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}

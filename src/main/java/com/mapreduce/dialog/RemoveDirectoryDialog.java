@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
+import com.mapreduce.Singletons;
 
 public class RemoveDirectoryDialog extends JDialog {
 
@@ -71,13 +72,7 @@ public class RemoveDirectoryDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				// String[] arr = ReadWrite.getFiles("/");
-				// Set<String> folders = new HashSet<>();
-				// for (String i : arr) {
-				// 	folders.add(i.substring(0, i.lastIndexOf('/') + 1));
-				// }
-				// comboBox.setModel(new DefaultComboBoxModel<String>(folders.stream().toArray(String[]::new)));
-				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories("/")));
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString())));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}

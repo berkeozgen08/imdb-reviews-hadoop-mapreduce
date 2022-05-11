@@ -77,11 +77,6 @@ public class DateAverageDialog extends JDialog {
 		}
 		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		// try {
-		// 	comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
-		// } catch (IllegalArgumentException | IOException e1) {
-		// 	e1.printStackTrace();
-		// }
 		final SelectionManager manager = new SelectionManager();
 		MultiRenderer renderer = new MultiRenderer(manager);
 		comboBox.addActionListener(manager);

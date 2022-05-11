@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import com.mapreduce.util.DirectoryFilter;
@@ -16,13 +14,14 @@ import com.mapreduce.util.DirectoryFilter;
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
-import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.PathFilter;
 import org.apache.hadoop.fs.RemoteIterator;
 
 public class ReadWrite {
+	public static Path root = Singletons.fileSystem.getHomeDirectory();
+
 	public static void readFile(String fileName) throws IOException {
 		Path hdfsReadPath = new Path(fileName);
 		FSDataInputStream inputStream = Singletons.fileSystem.open(hdfsReadPath);
@@ -71,7 +70,7 @@ public class ReadWrite {
 			Singletons.fileSystem.listFiles(new Path(path), true);
 		List<String> files = new ArrayList<>();
 		while (iter.hasNext()) {
-			files.add(iter.next().getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), ""));
+			files.add(iter.next().getPath().toString().replace(root.toString(), ""));
 		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
@@ -82,7 +81,7 @@ public class ReadWrite {
 			return Arrays
 				.asList(Singletons.fileSystem.listStatus(new Path(path), filter))
 				.stream()
-				.map(i -> i.getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), "") + "/")
+				.map(i -> i.getPath().toString().replace(root.toString(), "") + "/")
 				.collect(Collectors.toList());
 		} catch (IllegalArgumentException | IOException e) {
 			e.printStackTrace();
@@ -93,17 +92,9 @@ public class ReadWrite {
 	public static String[] getDirectories(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		DirectoryFilter directoryFilter = new DirectoryFilter();
 		List<String> files = getDir(path, directoryFilter);
-		System.out.println(files);
-		System.out.println(getDir("/", directoryFilter));
-		System.out.println(getDir("/", new PathFilter() {
-			@Override
-			public boolean accept(Path arg0) {
-				return true;
-			}
-		}));
-		// for (int i = 0; i < files.size(); i++) {
-		// 	files.addAll(getDir(files.get(i), directoryFilter));
-		// }
+		for (int i = 0; i < files.size(); i++) {
+			files.addAll(getDir(files.get(i), directoryFilter));
+		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
 	}
