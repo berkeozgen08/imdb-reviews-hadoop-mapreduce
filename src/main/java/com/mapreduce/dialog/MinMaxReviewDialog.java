@@ -73,7 +73,7 @@ public class MinMaxReviewDialog extends JDialog {
 		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		try {
-			comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles(ReadWrite.root.toString())));
+			comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getFiles("/")));
 		} catch (IllegalArgumentException | IOException e1) {
 			e1.printStackTrace();
 		}

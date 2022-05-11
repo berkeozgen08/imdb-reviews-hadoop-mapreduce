@@ -135,7 +135,7 @@ public class Main {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ReadWrite.listFiles(ReadWrite.root.toString());
+					ReadWrite.listFiles("/");
 				} catch (IllegalArgumentException | IOException e1) {
 					e1.printStackTrace();
 				}
