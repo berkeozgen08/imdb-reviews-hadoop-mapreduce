@@ -4,14 +4,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+import com.mapreduce.util.DirectoryFilter;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.PathFilter;
 import org.apache.hadoop.fs.RemoteIterator;
 
 public class ReadWrite {
@@ -52,14 +59,38 @@ public class ReadWrite {
 		}
 	}
 	
+	private static Comparator<String> depth = (a, b) -> (int) (a.chars().filter(i -> i == '/').count() - b.chars().filter(i -> i == '/').count());
+
 	public static String[] getFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
 		RemoteIterator<LocatedFileStatus> iter =
 			Singletons.fileSystem.listFiles(new Path(path), true);
 		List<String> files = new ArrayList<>();
 		while (iter.hasNext()) {
-			files.add(Path.getPathWithoutSchemeAndAuthority(iter.next().getPath()).toString());
+			files.add(iter.next().getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), ""));
 		}
-		Comparator<String> depth = (a, b) -> (int) (a.chars().filter(i -> i == '/').count() - b.chars().filter(i -> i == '/').count());
+		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
+		return files.stream().toArray(String[]::new);
+	}
+	
+	private static List<String> getDir(String path, PathFilter filter) {
+		try {
+			return Arrays
+				.asList(Singletons.fileSystem.listStatus(new Path(path), filter))
+				.stream()
+				.map(i -> i.getPath().toString().replace(Singletons.fileSystem.getHomeDirectory().toString(), ""))
+				.collect(Collectors.toList());
+		} catch (IllegalArgumentException | IOException e) {
+			e.printStackTrace();
+			return Arrays.asList();
+		}
+	};
+
+	public static String[] getDirectories(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+		DirectoryFilter directoryFilter = new DirectoryFilter();
+		List<String> files = getDir(path, directoryFilter);
+		for (String file : files) {
+			files.addAll(getDir(file, directoryFilter));
+		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
 		return files.stream().toArray(String[]::new);
 	}
