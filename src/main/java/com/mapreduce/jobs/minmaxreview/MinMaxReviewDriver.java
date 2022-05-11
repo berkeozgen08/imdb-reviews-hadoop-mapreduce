@@ -5,7 +5,6 @@ import com.mapreduce.util.JSONParser;
 import com.mapreduce.util.XmlInputFormat;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
@@ -23,7 +22,7 @@ public class MinMaxReviewDriver {
 		jobConf.setJobName("MinMaxReview");
 
 		jobConf.setOutputKeyClass(Text.class);
-		jobConf.setOutputValueClass(IntWritable.class);
+		jobConf.setOutputValueClass(MinMaxTuple.class);
 
 		jobConf.setMapperClass(MinMaxReviewMapper.class);
 		jobConf.setReducerClass(MinMaxReviewReducer.class);
