@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class WriteDialog extends JDialog {
 	private JButton btnNewButton;
 	private JFileChooser fileChooser = new JFileChooser();
 	private JComboBox<String> comboBox;
+	private String[] outputs;
 
 	/**
 	 * Launch the application.
@@ -78,6 +80,11 @@ public class WriteDialog extends JDialog {
 					switch (fileChooser.showOpenDialog(WriteDialog.this)) {
 						case JFileChooser.APPROVE_OPTION:
 							btnNewButton.setText(fileChooser.getSelectedFile().getPath());
+							String[] arr = Arrays.copyOf(outputs, outputs.length);
+							for (int i = 0; i < outputs.length; i++) {
+								arr[i] = outputs[i] + btnNewButton.getText();
+							}
+							comboBox.setModel(new DefaultComboBoxModel<String>(arr));
 							break;
 						case JFileChooser.CANCEL_OPTION:
 							break;					 
@@ -109,10 +116,12 @@ public class WriteDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString(), true)));
+				outputs = ReadWrite.getDirectories(ReadWrite.root.toString(), true);
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}
+			comboBox.setModel(new DefaultComboBoxModel<String>(outputs));
+			
 			GridBagConstraints gbc_textField = new GridBagConstraints();
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
