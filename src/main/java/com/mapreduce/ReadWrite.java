@@ -96,7 +96,7 @@ public class ReadWrite {
 			files.addAll(getDir(files.get(i), directoryFilter));
 		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
-		if (includeRoot) files.add(0, "/");
+		if (includeRoot) files.add(0, "");
 		return files.stream().map(i -> i.replace(root.toString(), "") + "/").toArray(String[]::new);
 	}
 
