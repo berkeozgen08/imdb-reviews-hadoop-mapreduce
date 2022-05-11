@@ -53,7 +53,7 @@ public class ReadWrite {
 	}
 
 	public static void listFiles(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
-		String[] directories = getDirectories(path);
+		String[] directories = getDirectories(path, false);
 		for (String dir : directories) {
 			System.out.println(dir);
 		}
@@ -89,13 +89,14 @@ public class ReadWrite {
 		}
 	};
 
-	public static String[] getDirectories(String path) throws FileNotFoundException, IllegalArgumentException, IOException {
+	public static String[] getDirectories(String path, boolean includeRoot) throws FileNotFoundException, IllegalArgumentException, IOException {
 		DirectoryFilter directoryFilter = new DirectoryFilter();
 		List<String> files = getDir(path, directoryFilter);
 		for (int i = 0; i < files.size(); i++) {
 			files.addAll(getDir(files.get(i), directoryFilter));
 		}
 		files.sort((a, b) -> depth.compare(a, b) == 0 ? a.compareTo(b) : (depth.compare(a, b) > 0 ? -1 : 1));
+		if (includeRoot) files.add(0, "/");
 		return files.stream().map(i -> i.replace(root.toString(), "") + "/").toArray(String[]::new);
 	}
 

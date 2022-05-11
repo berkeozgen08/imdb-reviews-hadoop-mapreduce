@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -29,6 +31,7 @@ public class WriteDialog extends JDialog {
 	private JLabel lblNewLabel_1;
 	private JButton btnNewButton;
 	private JFileChooser fileChooser = new JFileChooser();
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -105,8 +108,13 @@ public class WriteDialog extends JDialog {
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		}
 		{
-			textField = new JTextField();
-			lblNewLabel.setLabelFor(textField);
+			comboBox = new JComboBox<String>();
+			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			try {
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString(), true)));
+			} catch (IllegalArgumentException | IOException e) {
+				e.printStackTrace();
+			}
 			GridBagConstraints gbc_textField = new GridBagConstraints();
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;

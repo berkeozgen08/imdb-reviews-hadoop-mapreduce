@@ -9,8 +9,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -21,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
-import com.mapreduce.Singletons;
 
 public class RemoveDirectoryDialog extends JDialog {
 
@@ -72,7 +69,7 @@ public class RemoveDirectoryDialog extends JDialog {
 			comboBox = new JComboBox<String>();
 			comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			try {
-				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString())));
+				comboBox.setModel(new DefaultComboBoxModel<String>(ReadWrite.getDirectories(ReadWrite.root.toString(), false)));
 			} catch (IllegalArgumentException | IOException e) {
 				e.printStackTrace();
 			}

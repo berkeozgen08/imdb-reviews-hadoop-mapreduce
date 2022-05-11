@@ -12,7 +12,10 @@ import com.mapreduce.util.JSONParser;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.*;
+import org.apache.hadoop.mapred.MapReduceBase;
+import org.apache.hadoop.mapred.Mapper;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
 import org.json.JSONObject;
 
 public class DateAverageMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
