@@ -126,7 +126,7 @@ public class WriteDialog extends JDialog {
 							String input = btnNewButton.getText();
 							if (input == null || input.equals("Choose")) return;
 							String output = textField.getText();
-							if (output == null || output.isBlank()) return;
+							if (output == null || output.trim().isEmpty()) return;
 							ReadWrite.writeFile(output, input);
 							// JOptionPane.showMessageDialog(okButton.getParent(), "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
 						} catch (IOException err) {

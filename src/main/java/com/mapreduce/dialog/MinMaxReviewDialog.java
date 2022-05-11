@@ -118,7 +118,7 @@ public class MinMaxReviewDialog extends JDialog {
 						String[] selected = manager.selectedItems.stream().toArray(String[]::new);
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
-						if (output == null || output.isBlank()) return;
+						if (output == null || output.trim().isEmpty()) return;
 						MinMaxReviewDriver.run(selected, output);
 						dispose();
 					}

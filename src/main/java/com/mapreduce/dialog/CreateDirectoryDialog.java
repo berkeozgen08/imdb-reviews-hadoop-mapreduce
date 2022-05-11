@@ -84,7 +84,7 @@ public class CreateDirectoryDialog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							String path = textField_1.getText();
-							if (path == null || path.isBlank()) return;
+							if (path == null || path.trim().isEmpty()) return;
 							ReadWrite.createDirectory(path);
 							System.out.println("Created");
 						} catch (IOException err) {
