@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.mapreduce.ReadWrite;
 import com.mapreduce.jobs.dateaverage.DateAverageDriver;
 import com.mapreduce.jobs.dateaverage.DateAverageMapper;
 import com.mapreduce.util.MultiRenderer;
@@ -160,7 +161,7 @@ public class DateAverageDialog extends JDialog {
 				final JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String[] selected = manager.selectedItems.stream().toArray(String[]::new);
+						String[] selected = manager.selectedItems.stream().map(i -> ReadWrite.root.toString() + i).toArray(String[]::new);
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
