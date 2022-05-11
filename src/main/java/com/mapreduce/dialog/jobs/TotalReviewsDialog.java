@@ -25,8 +25,6 @@ import com.mapreduce.jobs.totalreviews.TotalReviewsDriver;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-import org.apache.hadoop.fs.Path;
-
 public class TotalReviewsDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

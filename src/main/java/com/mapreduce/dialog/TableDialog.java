@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class TableDialog extends JDialog {
 
@@ -38,9 +40,10 @@ public class TableDialog extends JDialog {
 			table.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			table.setModel(new DefaultTableModel(rows, headers));
 			int width = table.getSize().width;
-			table.getColumnModel().getColumn(0).setPreferredWidth(width);
-			table.getColumnModel().getColumn(1).setPreferredWidth(width);
-			table.getColumnModel().getColumn(2).setPreferredWidth(width);
+			Enumeration<TableColumn> iter = table.getColumnModel().getColumns();
+			while (iter.hasMoreElements()) {
+				iter.nextElement().setPreferredWidth(width);
+			}
 		}
 		contentPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		{
