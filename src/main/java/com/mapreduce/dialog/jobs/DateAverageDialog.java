@@ -164,7 +164,10 @@ public class DateAverageDialog extends JDialog {
 						if (DateAverageMapper.from == null) return;
 						DateAverageMapper.to = (Date) datePicker.getModel().getValue();
 						if (DateAverageMapper.to == null) return;
+						long start = System.nanoTime();
 						DateAverageDriver.run(selected, output);
+						long end = System.nanoTime();
+						System.out.printf("%.2fs elapsed\n", ((end - start) * Math.pow(10, -9)));
 						try {
 							String[] results = ReadWrite.getFiles(output);
 							for (String res : results) {

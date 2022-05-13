@@ -108,7 +108,10 @@ public class MovieAverageDialog extends JDialog {
 						if (selected == null || selected.length == 0) return;
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
+						long start = System.nanoTime();
 						MovieAverageDriver.run(selected, output);
+						long end = System.nanoTime();
+						System.out.printf("%.2fs elapsed\n", ((end - start) * Math.pow(10, -9)));
 						try {
 							String[] results = ReadWrite.getFiles(output);
 							for (String res : results) {
