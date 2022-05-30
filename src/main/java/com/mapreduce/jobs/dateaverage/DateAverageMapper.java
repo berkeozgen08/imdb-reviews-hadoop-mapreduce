@@ -32,8 +32,9 @@ public class DateAverageMapper extends MapReduceBase implements Mapper<LongWrita
 			if (date.after(from) && date.before(to)) {
 				return;
 			}
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			return;
 		}
 		try {
 			output.collect(
