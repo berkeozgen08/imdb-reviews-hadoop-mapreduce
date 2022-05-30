@@ -5,7 +5,7 @@ import com.mapreduce.util.JSONParser;
 import com.mapreduce.util.XmlInputFormat;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapred.FileOutputFormat;
@@ -23,7 +23,7 @@ public class MovieAverageDriver {
 		jobConf.setJobName("MovieAverage");
 
 		jobConf.setOutputKeyClass(Text.class);
-		jobConf.setOutputValueClass(DoubleWritable.class);
+		jobConf.setOutputValueClass(IntWritable.class);
 
 		jobConf.setMapperClass(MovieAverageMapper.class);
 		jobConf.setReducerClass(MovieAverageReducer.class);

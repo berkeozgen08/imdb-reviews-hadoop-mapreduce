@@ -2,7 +2,6 @@ package com.mapreduce.jobs.dateaverage;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,7 +28,7 @@ public class DateAverageMapper extends MapReduceBase implements Mapper<LongWrita
 		String dateString = obj.getString("review_date");
 		try {
 			Date date = format.parse(dateString);
-			if (date.after(from) && date.before(to)) {
+			if (!(date.after(from) && date.before(to))) {
 				return;
 			}
 		} catch (Exception e) {
